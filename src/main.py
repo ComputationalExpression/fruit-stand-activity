@@ -43,7 +43,7 @@ def main():
     # looking it up
     # if it is not a key: save "UNKNOWN" to `sale` and 0 to `sold`
     # otherwise, if `sell_amount` is more than the quantity in stock: save
-    # "SHORT" to `sale` and the whole quantity in stock to `sold`
+    # "SHORT" to `sale` and the full quantity in stock to `sold`
     # otherwise: save "SOLD" to `sale` and `sell_amount` to `sold`
     # Then set `revenue` and `left` to 0. If `sell_fruit` is a key, subtract
     # `sold` from its quantity, save `sold` times its price to `revenue`, and

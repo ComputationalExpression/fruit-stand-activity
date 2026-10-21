@@ -38,7 +38,7 @@ stock = {"apples": 12, "pears": 5, "plums": 0, "cherries": 8}
 prices = {"apples": 3, "pears": 4, "plums": 5, "cherries": 7}
 ```
 
-`stock` maps each fruit to the quantity on hand, and `prices` maps each fruit to its price in
+`stock` maps each fruit to the quantity in stock, and `prices` maps each fruit to its price in
 dollars.
 
 **Your program has to work for any stock and any prices, not just these.** Take every number it
