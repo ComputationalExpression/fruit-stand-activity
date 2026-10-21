@@ -1,0 +1,59 @@
+# Ten checks: seven run your program, two read it as Python, and one reads its text.
+# The seven program checks read only the stand log at the end of a run, never the lines printed
+# along the way, and they forgive extra spaces, letter case, and a missing colon. Most of them
+# run your program against different stock and prices, so a number counted by eye and typed in
+# passes only for the stock it was counted from. A loop that never ends fails its check after
+# five seconds.
+
+- description: "[COUNT] Kinds before, Pieces and Stock value come from the dictionaries: len(stock), the total of every quantity, and quantity times price for every fruit"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fruit_stand.py::test_counts_kinds_pieces_and_value
+
+- description: "[COUNT] Out of stock is a list of the fruits whose quantity is 0, built with append inside the loop"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fruit_stand.py::test_out_of_stock_lists_the_fruits_with_none_left
+
+- description: "[SALE] Enough stock is SOLD: subtract the amount, and Revenue is the amount times that fruit's price"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fruit_stand.py::test_a_sale_with_enough_stock
+
+- description: "[SALE] Asking for more than is left is SHORT: sell only what is there, so Left is 0 and Sold is the old quantity"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fruit_stand.py::test_a_sale_for_more_than_is_left
+
+- description: "[SALE] A fruit that is not a key is UNKNOWN: check with `in` before any lookup, sell nothing, and add nothing"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fruit_stand.py::test_a_sale_of_a_fruit_the_stand_does_not_carry
+
+- description: "[RESTOCK] A fruit already carried gains the new amount, and its price changes to the new price"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fruit_stand.py::test_restocking_a_fruit_already_carried
+
+- description: "[RESTOCK] A new fruit becomes a new entry: stock\\[fruit\\] = amount adds it, and Kinds after goes up by one"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_fruit_stand.py::test_restocking_a_new_fruit
+
+- description: "[CODE] One for loop over stock, and an in or not in check before the lookup that could fail"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_a_for_loop_over_the_stock_and_an_in_check
+
+- description: "[CODE] Entries change by assigning to a key: stock\\[...\\] = ... and prices\\[...\\] = ... both appear"
+  check: ExecuteCommand
+  options:
+    command: uv run pytest tests/test_structure.py::test_entries_are_changed_and_added_by_assigning_to_a_key
+
+- src/main.py:
+  - description: "[CODE] No TODO markers remain: delete each TODO comment once its code is written, including Author"
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true

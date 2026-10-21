@@ -1,0 +1,21 @@
+[project]
+name = "activity-07-fruit-stand"
+version = "1.0.0"
+requires-python = ">=3.11"
+dependencies = [
+    "gatorgrade",
+    "pytest",
+    "pytest-timeout",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "src"
+]
+testpaths = [
+    "tests"
+]
+timeout = 5
+filterwarnings = [
+    "ignore::pytest.PytestAssertRewriteWarning",
+]
